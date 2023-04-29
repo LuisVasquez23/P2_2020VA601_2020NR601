@@ -1,0 +1,35 @@
+﻿@model IEnumerable<P2_2020VA601_2020NR601.Models.Generos>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-success">Agregar genero</a>
+</p>
+<table class="table table-striped table-bordered text-center">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.genero)
+            </th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.genero)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.id" class="btn btn-primary btn-sm">Editar</a> 
+                    <a asp-action="Details" asp-route-id="@item.id" class="btn btn-warning btn-sm">Detalle</a> 
+                    <a asp-action="Delete" asp-route-id="@item.id" class="btn btn-danger btn-sm">Eliminar</a>
+                </td>
+            </tr>
+    }
+    </tbody>
+</table>

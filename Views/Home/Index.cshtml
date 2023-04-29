@@ -1,0 +1,111 @@
+﻿@{
+    ViewData["Title"] = "Registro de Covid";
+
+    var generos = ViewData["generos"];
+    var departamentos = ViewData["departamentos"];
+    var casosReportados = ViewData["casosReportados"] as List<dynamic>;
+}
+
+<style>
+    body{
+        background: #eaeaea;
+    }
+</style>
+
+<div class="container">
+       <div class="row">
+           <div class="col-12 text-center mb-3">
+               <h1 class="h1">Registro de covid</h1>
+               <p class="fs-5 text-muted">
+                   El siguiente formulario es para llevar el registro de casos reportados de <br /> Covid por departamento y genero
+               </p>
+           </div>
+           <form asp-action="CrearRegistro" method="post" class="mb-4">
+               <div class="row">
+                    <!-- Departamento -->
+                <div class="col-md-6 mb-4">
+                        <div class="form-group">
+                            <label for="" class="text-muted">Departamento</label>
+                            @Html.DropDownList("departamento_id" , departamentos as SelectList, "Seleccione un Departamento" , new {@class="form-control"})
+                        </div>
+                    </div>
+
+                    <!-- Genero -->
+                    <div class="col-md-6 mb-4">
+                        <div class="form-group">
+                            <label for="" class="text-muted">Genero</label>
+                            @Html.DropDownList("genero_id" , generos as SelectList, "Seleccione un Genero" , new {@class="form-control"})
+                        </div>
+                    </div>
+
+                    <!-- Casos confirmados -->
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="" class="text-muted">Casos confirmados</label>
+                            @Html.TextBox("confirmados" , "" , new {@class="form-control" , type = "number"})
+                        </div>
+                    </div>
+
+                    <!--  Numeros de recuperados -->
+                     <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="" class="text-muted">Numeros de Recuperados</label>
+                            @Html.TextBox("recuperados" , "" , new {@class="form-control" , type = "number"})
+                        </div>
+                     </div>
+
+                     <!--  Numeros de fallecidos -->
+                      <div class="col-md-4 mb-4">
+                         <div class="form-group">
+                            <label for="" class="text-muted">Numeros de fallecidos</label>
+                            @Html.TextBox("fallecidos" , "" , new {@class="form-control" , type = "number"})
+                         </div>
+                      </div>
+
+                      <div class="col-md-12">
+                          <input type="submit" value="Guardar Registro" class="btn btn-success form-control" />
+                      </div>
+               </div>
+
+           </form>
+           <hr />
+
+           <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        Casos reportados
+                    </div>
+                    <div class="card-body">
+                        <table class="table ">
+                            <thead>
+                                <tr>
+                                    <th>Departamento</th>
+                                    <th>Género</th>
+                                    <th>Confirmados</th>
+                                    <th>Recuperados</th>
+                                    <th>Fallecidos</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var caso in casosReportados)
+                                {
+                                    <tr>
+                                        <th scope="row">@caso.departamento</th>
+                                        <td>@caso.genero</td>
+                                        <td>@caso.confirmados</td>
+                                        <td>@caso.recuperados</td>
+                                        <td>@caso.fallecidos</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <div class="card-footer p-4 text-center fs-4">
+                        Derechos Reservados: Paolo Isacc Navarro Rosales - Luis Enrique Vásquez Aquila
+                    </div>
+                </div>
+           </div>
+       </div>
+
+</div>
